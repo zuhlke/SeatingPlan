@@ -9,4 +9,4 @@ data class Table(
 }
 
 @JvmInline
-value class Group(private val i: Int)
+value class Group(private val i: String)

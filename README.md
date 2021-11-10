@@ -13,7 +13,7 @@ Generates a seating plan with people from each group spread out across tables.
 ## Algorithm
 
 The program aims to assign people to each table based on their group. It first distributes the groups across the tables,
-and then randomly chooses the people from the groups to be distributed
+and then randomly chooses the people from the groups to be distributed.
 
 ### Example:
 
@@ -58,7 +58,7 @@ Table 3  |         | Saruman |           |
 If the table capacity and number of tables is much larger than the number of people, then it awkardly produces tables
 with only one person on each table.
 
-Eg: 3 tables, seating 5, and there are only 4 people, the output would be
+Eg: For 3 tables, seating 5, and there are only 4 people, the output would be:
 
 ```
 Table 1 => 2 people 

@@ -34,6 +34,22 @@ class DistributeGroupsTest {
     }
 
     @Test
+    fun `five people, three groups, two tables of capacity two`() {
+        val groupedPeople = mapOf(Group(1) to 2, Group(2) to 2, Group(3) to 1)
+        val tables = emptyTables(noOfTables = 3, tableCapacity = 2)
+
+        val assignments = distributeGroups(tables, groupedPeople)
+
+        assertEquals(
+            listOf(
+                Table(2, mutableMapOf(Group(1) to 1, Group(2) to 1)),
+                Table(2, mutableMapOf(Group(1) to 1, Group(3) to 1)),
+                Table(2, mutableMapOf(Group(2) to 1)),
+            ), assignments
+        )
+    }
+
+    @Test
     fun `nine people, two groups, three tables `() {
         val groupedPeople = mapOf(Group(1) to 2, Group(2) to 7)
         val tables = emptyTables(noOfTables = 3, tableCapacity = 4)
@@ -47,17 +63,6 @@ class DistributeGroupsTest {
                 Table(4, mutableMapOf(Group(2) to 3)),
             ), assignments
         )
-    }
-
-    @Test
-    fun `smallest table with space`() {
-        val fullTable = Table(2, mutableMapOf(Group(1) to 2))
-        val emptyTable = emptyTableWithCapacity(3)
-        val tableWithOneSpace = Table(2, mutableMapOf(Group(1) to 1))
-
-        assertEquals(emptyTable, listOf(fullTable, emptyTable, tableWithOneSpace).smallestTableWithSpace())
-        assertEquals(tableWithOneSpace, listOf(fullTable, tableWithOneSpace).smallestTableWithSpace())
-        assertEquals(null, listOf(fullTable).smallestTableWithSpace())
     }
 
     @Test
@@ -79,15 +84,6 @@ class DistributeGroupsTest {
                 Table(3, mutableMapOf(Group(2) to 1, Group(3) to 1)),
             ), assignments
         )
-    }
-
-    private fun emptyTableWithCapacity(capacity: Int) = Table(capacity, mutableMapOf())
-    private fun emptyTables(noOfTables: Int, tableCapacity: Int): List<Table> {
-        val tables = mutableListOf<Table>()
-        repeat(noOfTables) {
-            tables.add(emptyTableWithCapacity(tableCapacity))
-        }
-        return tables
     }
 
 }
